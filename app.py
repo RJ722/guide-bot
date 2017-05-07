@@ -27,10 +27,18 @@ def handle_messages():
     print payload
     for sender, message in messaging_events(payload):
         print "Incoming from %s: %s" % (sender, message)
-        message = message[::-1]
+        message = amend_message(message)
         print "We are going to send the reversed message: ", message
         send_message(PAT, sender, message)
     return "ok"
+
+def amend_message(message):
+    if message == "It is available":
+        return "That is great. I am notifying Rahul"
+    elif message == "Not available":
+        return "Ok, No Problem."
+    else:
+        return "Thanks! We'll notify you when a new request arises."
 
 def messaging_events(payload):
     """Generate tuples of (sender_id, message_text) from the
@@ -55,12 +63,7 @@ def send_message(token, recipient, text):
             "id": recipient
         },
         "message":{
-            "text": text.decode('unicode_escape'),
-            "quick_replies": [{
-                "content_type": "text",
-                "title": "Something",
-                "payload": "payload data"
-            }]
+            "text": text.decode('unicode_escape')
         }
     }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params={"access_token": token},
