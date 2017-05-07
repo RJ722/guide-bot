@@ -22,6 +22,7 @@ def handle_verification():
 @app.route('/', methods=['POST'])
 def handle_messages():
     print "Handling Messages"
+    print request.url
     payload = request.get_data()
     print payload
     for sender, message in messaging_events(payload):
@@ -58,7 +59,7 @@ def send_message(token, recipient, text):
             "quick_replies": [
             {
                 "content_type": "text",
-                "title": "Chutiya ho kya?",
+                "title": "Something or the other",
                 "payload": "Payload data"
             }]
         }
