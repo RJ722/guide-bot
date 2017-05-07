@@ -34,11 +34,19 @@ def handle_messages():
 
 def amend_message(message):
     if message == "It is available":
-        return "That is great. I am notifying Rahul"
+        return "That is great. I am notifying John."
     elif message == "Not available":
-        return "Ok, No Problem."
-    else:
+        return "OK, No Problem."
+    elif message == "Available Later":
         return "Thanks! We'll notify you when a new request arises."
+    elif message == "Make offer to buy":
+        return "Make your offer please. We will notify Rahul."
+    elif message == "Rent it":
+        return "We are notifying Rahul. You will be charge Rs.50/mo"
+    elif message == "Decline":
+        return "OK, No Problem."
+    else:
+        return "YO! This is a default reply"
 
 def messaging_events(payload):
     """Generate tuples of (sender_id, message_text) from the
@@ -50,7 +58,7 @@ def messaging_events(payload):
         if "message" in event and "text" in event["message"]:
             yield event["sender"]["id"], event["message"]["text"].encode('unicode_escape')
         else:
-            yield event["sender"]["id"], "I can't echo this"
+            yield event["sender"]["id"], "I didn't understand this"
 
 
 def send_message(token, recipient, text):
