@@ -56,6 +56,11 @@ def send_message(token, recipient, text):
         },
         "message":{
             "text": text.decode('unicode_escape'),
+            "quick_replies": [{
+                "content_type": "text",
+                "title": "Something",
+                "payload": "payload data"
+            }]
         }
     }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params={"access_token": token},
