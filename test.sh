@@ -24,8 +24,8 @@ curl -X POST -H "Content-Type: application/json" -d '{
                 "type":"web_url",
                 "url":"https://github.com",
                 "title":"View Website"
-              }              
-            ]      
+              }
+            ]
           }
         ]
       }

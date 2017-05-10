@@ -46,7 +46,7 @@ def amend_message(message):
     elif message == "Decline":
         return "OK, No Problem."
     else:
-        return "YO! This is a default reply"
+        return "YO! This is a default reply, we are sending you the reversed copy of your message string: %s" % message[::-1]
 
 def messaging_events(payload):
     """Generate tuples of (sender_id, message_text) from the
